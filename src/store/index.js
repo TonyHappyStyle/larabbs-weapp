@@ -1,8 +1,10 @@
 import Vuex from '@wepy/x'
-import users from './modules/user'
+import user from './modules/user'
 
+// 导出 store 对象
 export default new Vuex.Store({
   modules: {
-    users,
+    user
   }
 })
+

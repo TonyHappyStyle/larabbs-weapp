@@ -1,36 +1,35 @@
 <style lang="less">
-  @import (css) './assets/style/app.wxss';
-  .page{
-    background-color: #FFFFFF;
-  }
+@import (css) './assets/style/app.wxss';
+.page{
+  background-color: #FFFFFF;
+}
+
 </style>
 
 <script>
-  import wepy from '@wepy/core'
-  import eventHub from './common/eventHub'
-  import vuex from '@wepy/x'
-  import promisify from '@wepy/use-promisify'
+import wepy from '@wepy/core'
+import eventHub from './common/eventHub'
+import vuex from '@wepy/x'
+import promisify  from '@wepy/use-promisify';
 
-  wepy.use(vuex)
-  wepy.use(promisify)
+wepy.use(vuex)
+wepy.use(promisify);
 
-  wepy.app({
-    onLaunch() {
-      wepy.wx.login().then(res => {
-        console.log('login: ', res)
-      })
-    },
-    methods: {
-    }
-  })
+wepy.app({
+  async onLaunch() {
+    const res = await wepy.wx.login()
+    console.log(res)
+  },
+  methods: {
+  }
+})
 </script>
 <config>
-  {
+{
   pages: [
     'pages/index',
     'pages/user',
-    'pages/auth/login',
-    'pages/test/test1'
+    'pages/auth/login'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -40,21 +39,18 @@
   },
   tabBar: {
     list: [{
-    pagePath: 'pages/index',
-    text: '首页',
-    iconPath: 'assets/images/index.png',
-    selectedIconPath: 'assets/images/index_selected.png'
+      pagePath: 'pages/index',
+      text: '首页',
+      iconPath: 'assets/images/index.png',
+      selectedIconPath: 'assets/images/index_selected.png'
     }, {
-    pagePath: 'pages/user',
-    text: '我的',
-    iconPath: 'assets/images/user.png',
-    selectedIconPath: 'assets/images/user_selected.png'
-    }, {
-    pagePath: 'pages/test/test1',
-    text: 'test'
+      pagePath: 'pages/user',
+      text: '我的',
+      iconPath: 'assets/images/user.png',
+      selectedIconPath: 'assets/images/user_selected.png'
     }],
     color: '#707070',
     selectedColor: '#00b5ad'
-    }
   }
+}
 </config>

@@ -1,63 +1,61 @@
 <style lang="less">
-  .login-wrap {
-    margin-top: 90px;
-  }
-  .weui-toptips {
+.login-wrap {
+  margin-top: 90px;
+}
+.weui-toptips {
     display: block;
-  }
+}
 </style>
 <template>
-  <div class="page">
-    <div class="page__bd">
-      <div class="page__bd login-wrap">
-        <div class="weui-toptips weui-toptips_warn fadeIn" v-if="errorMessage">{{ errorMessage }}</div>
-        <div class="weui-cells__title">Larabbs 用户登录</div>
-        <div class="weui-cells weui-cells_after-title">
-          <div class="weui-cell weui-cell_input" :class="{'weui-cell_warn': errors.username}">
-            <div class="weui-cell__hd">
-              <div class="weui-label">用户名</div>
-            </div>
-            <div class="weui-cell__bd">
-              <input class="weui-input" placeholder="手机号或邮箱" v-model="form.username" />
-            </div>
-            <div v-if="errors.username" class="weui-cell__ft">
-              <icon type="warn" size="23" color="#E64340"></icon>
-            </div>
+<div class="page">
+  <div class="page__bd">
+    <div class="page__bd login-wrap">
+      <div class="weui-toptips weui-toptips_warn fadeIn" v-if="errorMessage">{{ errorMessage }}</div>
+      <div class="weui-cells__title">Larabbs 用户登录</div>
+      <div class="weui-cells weui-cells_after-title">
+        <div class="weui-cell weui-cell_input" :class="{'weui-cell_warn': errors.username}">
+          <div class="weui-cell__hd">
+            <div class="weui-label">用户名</div>
           </div>
-          <div class="weui-cell weui-cell_input" :class="{'weui-cell_warn': errors.password}">
-            <div class="weui-cell__hd">
-              <div class="weui-label">密码</div>
-            </div>
-            <div class="weui-cell__bd">
-              <input class="weui-input" placeholder="输入密码" v-model="form.password" type="password" />
-            </div>
-            <div v-if="errors.password" class="weui-cell__ft">
-              <icon type="warn" size="23" color="#E64340"></icon>
-            </div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" placeholder="手机号或邮箱" v-model="form.username" />
+          </div>
+          <div v-if="errors.username" class="weui-cell__ft">
+            <icon type="warn" size="23" color="#E64340"></icon>
           </div>
         </div>
-
-        <div class="weui-cells__tips">
-          如果你还没有 Larabbs 用户可以
-          <a url="/pages/auth/register">注册新用户</a>
+        <div class="weui-cell weui-cell_input" :class="{'weui-cell_warn': errors.password}">
+          <div class="weui-cell__hd">
+            <div class="weui-label">密码</div>
+          </div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" placeholder="输入密码" v-model="form.password" type="password" />
+          </div>
+          <div v-if="errors.password" class="weui-cell__ft">
+            <icon type="warn" size="23" color="#E64340"></icon>
+          </div>
         </div>
+      </div>
 
-        <div class="weui-btn-area">
-          <button class="weui-btn" type="primary" @tap="submit">登录</button>
-        </div>
+      <div class="weui-cells__tips">
+        如果你还没有 Larabbs 用户可以
+        <a url="/pages/auth/register">注册新用户</a>
+      </div>
+
+      <div class="weui-btn-area">
+        <button class="weui-btn" type="primary" @tap="submit">登录</button>
       </div>
     </div>
   </div>
-
+</div>
 </template>
 <config>
   {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '登录',
   }
 </config>
 <script>
   import wepy from '@wepy/core'
-  import { login } from '@/api/auth'
   import store from '@/store'
   import WeValidator from 'we-validator'
 
@@ -93,7 +91,7 @@
             },
             password: {
               required: '请填写密码',
-              minlength: '密码最少6位数'
+              minlength: '密码最少 6 位数'
             }
           },
           onMessage: (data) => {
@@ -112,6 +110,7 @@
 
         try {
           await this.$store.dispatch('login', this.form)
+
           wx.navigateBack()
         } catch (err) {
           this.errorMessage = err.response.data.message
@@ -126,5 +125,5 @@
       } catch (err) {
       }
     }
-})
+  })
 </script>
